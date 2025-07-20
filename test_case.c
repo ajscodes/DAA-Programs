@@ -1,30 +1,34 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-void main(){
+#define N 100000
+
+int main() {
     FILE *file;
 
-    //BestCase.txt generator
+    // BestCase.txt: Sorted ascending
     file = fopen("BestCase.txt", "w");
-    for (int i = 0; i < 100000; i++)
-    {
+    for (int i = 0; i < N; i++) {
         fprintf(file, "%d ", i);
     }
     fclose(file);
 
-    //WorstCase.txt generator
+    // WorstCase.txt: Sorted descending
     file = fopen("WorstCase.txt", "w");
-    for (int i = 100000; i > 0; i--)
-    {
+    for (int i = N - 1; i >= 0; i--) {
         fprintf(file, "%d ", i);
     }
     fclose(file);
 
-    //AverageCase.txt generator
+    // AverageCase.txt: Random values
     file = fopen("AverageCase.txt", "w");
-    for (int i = 0; i < 100000; i++)
-    {
-        fprintf(file, "%d ", rand() % 100000);
+    srand(time(NULL)); // Seed random generator
+    for (int i = 0; i < N; i++) {
+        fprintf(file, "%d ", rand() % N);
     }
     fclose(file);
+
+    printf("Test case files generated successfully.\n");
+    return 0;
 }
